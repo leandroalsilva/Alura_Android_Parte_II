@@ -16,6 +16,8 @@ import com.example.agenda.dao.AlunoDAO;
 import com.example.agenda.model.Aluno;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class ListaAlunosActivity extends AppCompatActivity {
     public static final String TITULO_APPBAR = "Lista de Alunos";
     private final AlunoDAO dao = new AlunoDAO();
@@ -57,12 +59,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void configuraLista() {
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
+        final List<Aluno> alunos = dao.todos();
         listaDeAlunos.setAdapter(new ArrayAdapter<>(this,android.
-                R.layout.simple_list_item_1,dao.todos()));
+                R.layout.simple_list_item_1, alunos));
         listaDeAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                Log.i("posicao_aluno", "" + posicao);
+                Aluno alunoEscolhido = alunos.get(posicao);
+                Log.i("aluno", "" + alunoEscolhido);
             }
         });
     }
