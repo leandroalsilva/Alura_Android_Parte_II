@@ -16,6 +16,18 @@ public class Aluno implements Serializable {
 
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     @NonNull
     @Override
     public String toString() {
