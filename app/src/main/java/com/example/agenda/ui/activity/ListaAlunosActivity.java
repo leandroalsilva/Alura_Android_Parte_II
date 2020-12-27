@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.agenda.R;
 import com.example.agenda.dao.AlunoDAO;
+import com.example.agenda.model.Aluno;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -27,6 +28,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
 
         configuraFabNovoAluno();
+
+        dao.salva(new Aluno("Leandro", "11223344", "lealmeids@gmail.com"));
+        dao.salva(new Aluno("Almeida", "55667788", "almeids@gmail.com"));
 
     }
 
