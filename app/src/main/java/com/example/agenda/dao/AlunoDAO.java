@@ -15,6 +15,20 @@ public class AlunoDAO {
         contadorDeIds++;
     }
 
+    public void editaAluno(Aluno aluno) {
+        Aluno alunoEncontrado = null;
+        for (Aluno a : alunos
+        ) {
+            if (a.getId() == aluno.getId()) {
+                alunoEncontrado = a;
+            }
+            if (alunoEncontrado != null) {
+                int posicaoDoAluno = alunos.indexOf(alunoEncontrado);
+                alunos.set(posicaoDoAluno, aluno);
+            }
+        }
+    }
+
     public List<Aluno> todos() {
         return new ArrayList<>(alunos);
     }
