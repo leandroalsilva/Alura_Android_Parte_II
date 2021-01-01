@@ -36,6 +36,8 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             campoNome.setText(aluno.getNome());
             campoTelefone.setText(aluno.getTelefone());
             campoEmail.setText(aluno.getEmail());
+        }else{
+            aluno = new Aluno();
         }
     }
 
@@ -47,7 +49,11 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 //                Aluno alunoCriado = criaAluno();
 //                salvaAluno(alunoCriado);
                 preencheAluno();
-                dao.edita(aluno);
+                if (aluno.temIdValido()){
+                    dao.edita(aluno);
+                }else {
+                    dao.salva(aluno);
+                }
                 finish();
             }
         });
@@ -59,10 +65,6 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         campoEmail = findViewById(R.id.activity_formulario_aluno_email);
     }
 
-    private void salvaAluno(Aluno aluno) {
-        dao.salva(aluno);
-        finish();
-    }
 
     private void preencheAluno() {
         String nome = campoNome.getText().toString();
