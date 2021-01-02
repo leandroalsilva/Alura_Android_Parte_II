@@ -29,11 +29,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-
         setTitle(TITULO_APPBAR);
-
         configuraFabNovoAluno();
-
+        configuraLista();
         dao.salva(new Aluno("Leandro", "11223344", "lealmeids@gmail.com"));
         dao.salva(new Aluno("Almeida", "55667788", "almeids@gmail.com"));
 
@@ -58,12 +56,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         configuraLista();
+        adapter.clear();
+        adapter.addAll(dao.todos());
     }
 
     private void configuraLista() {
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
-        final List<Aluno> alunos = dao.todos();
-        configuraAdapter(listaDeAlunos, alunos);
+        configuraAdapter(listaDeAlunos);
         configuraListenerDeCliquePorItem(listaDeAlunos);
         listaDeAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -96,9 +95,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
         //Log.i("aluno", "" + aluno);
     }
 
-    private void configuraAdapter(ListView listaDeAlunos, List<Aluno> alunos) {
+    private void configuraAdapter(ListView listaDeAlunos) {
         adapter = new ArrayAdapter<>(this, android.
-                R.layout.simple_list_item_1, alunos);
+                R.layout.simple_list_item_1);
         listaDeAlunos.setAdapter(adapter);
     }
 }
