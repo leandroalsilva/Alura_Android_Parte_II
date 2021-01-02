@@ -3,6 +3,7 @@ package com.example.agenda.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add("Remover");
+    }
+
     private void configuraFabNovoAluno() {
         FloatingActionButton botaoNovoAluno = findViewById(R.id.activity_lista_alunos_fab_novo_aluno);
         botaoNovoAluno.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +76,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         configuraAdapter(listaDeAlunos);
         configuraListenerDeCliquePorItem(listaDeAlunos);
         configuraListenerDeCliqueLongoPorItem(listaDeAlunos);
+        registerForContextMenu(listaDeAlunos);
     }
 
     private void configuraListenerDeCliqueLongoPorItem(ListView listaDeAlunos) {
@@ -78,7 +86,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 //Log.i("CliqueLongo ","" + posicao);
                 Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
                 remove(alunoEscolhido);
-                return true;
+                return false;
             }
         });
     }
